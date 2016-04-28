@@ -15,7 +15,7 @@ public class Database {
     private static final String PROPERTY_USERNAME 		 = "nomutilisateur";
     private static final String PROPERTY_PASSWORD   	 = "motdepasse";
     
-    private Connection conn;
+    private static Connection conn;
     
     public Database()
     {
@@ -45,7 +45,7 @@ public class Database {
 		        
     }
     
-    public Connection getConnexion()
+    public static Connection getConnexion()
     {
     	return conn;
     }
