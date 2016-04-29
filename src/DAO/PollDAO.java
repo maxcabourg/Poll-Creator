@@ -17,22 +17,36 @@ public class PollDAO extends DAO<Poll>{
 
 	@Override
 	public boolean create(Poll poll) throws SQLException {
-		stmt = connect.createStatement();
-		int res = stmt.executeUpdate("INSERT INTO Poll VALUES ("+poll.getId()+",'"+poll.getQuestion()+"')");
-		for(Answer ans : poll.getAnswers())
-			stmt.executeUpdate("INSERT INTO Answer VALUES ("+ans.getId()+", '"+ans.getContent()+"')");	
+		stmt = connect.prepareStatement("INSERT INTO Poll VALUES (?, ?)");
+		stmt.setInt(1, poll.getId());
+		stmt.setString(2, poll.getQuestion());
+		stmt.executeUpdate();
+		for(Answer ans : poll.getAnswers()){
+			stmt = connect.prepareStatement("INSERT INTO Answer VALUES (?, ?, ?)");
+			stmt.setInt(1, ans.getId());
+			stmt.setString(2, ans.getContent());
+			stmt.setInt(3, poll.getId());
+			stmt.executeUpdate();
+		}
+		stmt.close();
 		return true;
 	}
 
 	@Override
-	public boolean delete(Poll obj) {
-		return false;
+	public boolean delete(Poll poll) throws SQLException {
+		stmt = connect.prepareStatement("DELETE FROM Poll WHERE id_poll = ?");
+		stmt.setInt(1,  poll.getId());
+		stmt.executeUpdate();
+		stmt.close();
+		return true;
 	}
 
 	@Override
 	public boolean update(Poll poll) throws SQLException {
-		stmt = connect.createStatement();
-		int res = stmt.executeUpdate("UPDATE Poll SET id_poll = "+poll.getId()+", question = '"+poll.getQuestion()+"'");
+		stmt = connect.prepareStatement("UPDATE Poll SET question = ? WHERE id_poll = ?");
+		stmt.setString(1, poll.getQuestion());
+		stmt.setInt(2, poll.getId());
+		stmt.executeUpdate();
 		stmt.close();
 		return true;
 	}
@@ -40,8 +54,9 @@ public class PollDAO extends DAO<Poll>{
 	@Override
 	public Poll find(int id) throws SQLException{
 		List<Answer> listAnswers = new ArrayList<Answer>();
-		stmt = connect.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Poll WHERE id_poll = "+id);
+		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_poll = ?");
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
 		int poll_id = rs.getInt("id_poll");
 		String question = rs.getString("question");
 		rs.close();
@@ -56,8 +71,8 @@ public class PollDAO extends DAO<Poll>{
 	@Override
 	public ArrayList<Poll> getAll() throws SQLException {
 		ArrayList<Poll> listPolls = new ArrayList<Poll>();
-		stmt = connect.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) as count FROM Poll");
+		stmt = connect.prepareStatement("SELECT COUNT(*) as count FROM Poll");
+		ResultSet rs = stmt.executeQuery();
 		int count = rs.getInt("count");
 		for(int i = 1; i<=count; i++){
 			listPolls.add(find(i));

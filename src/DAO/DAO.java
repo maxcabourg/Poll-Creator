@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import database.Database;
 
 public abstract class DAO<T> {
   protected Connection connect = Database.getConnexion();
-  protected Statement stmt = null;
+  protected PreparedStatement stmt = null;
    
   /**
   * Inserts a T object in the database
@@ -23,8 +24,9 @@ public abstract class DAO<T> {
   * Deletes a T object in the database
   * @param obj the object to delete
   * @return true if it worked, false otherwise
+ * @throws SQLException 
   */
-  public abstract boolean delete(T obj);
+  public abstract boolean delete(T obj) throws SQLException;
 
   /**
   * Updates a T object in the database
