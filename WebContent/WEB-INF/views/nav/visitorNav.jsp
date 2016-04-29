@@ -7,6 +7,7 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Login</a></li>
       <li><a href="#">See polls</a></li>
+      <li><a href="#">Sign in</a></li>
     </ul>
   </div>
 </nav>
