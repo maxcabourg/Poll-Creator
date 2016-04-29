@@ -5,12 +5,22 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   version="3.0">
 	<servlet>
-		<servlet-name>Inscription</servlet-name>
-		<servlet-class>servlets.Inscription</servlet-class>
+		<servlet-name>Accueil</servlet-name>
+		<servlet-class>servlets.Accueil</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Inscription</servlet-name>
-		<url-pattern>/inscription</url-pattern>
+		<servlet-name>Accueil</servlet-name>
+		<url-pattern>/accueil</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>PollCreation</servlet-name>
+		<servlet-class>servlets.PollForm</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PollCreation</servlet-name>
+		<url-pattern>/poll/create</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

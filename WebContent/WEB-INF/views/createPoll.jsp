@@ -21,7 +21,21 @@
   </head>
   <body>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
-    <h1>Hello world !</h1>
+    <form method="POST" action="">
+    	<div class="form-group">
+		    <label for="pseudo">Pseudo : </label>
+		    <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Password : </label>
+		    <input type="password" class="form-control" id="password" placeholder="Password">
+  		</div>
+  		<div class="form-group">
+		    <label for="mail">Email : </label>
+		    <input type="email" class="form-control" id="mail" placeholder="Email">
+  		</div>
+  		<button type="submit" class="btn btn-default">Submit</button>
+    </form>
     <jsp:include page="../views/footer.jsp" />
 
   </body>
