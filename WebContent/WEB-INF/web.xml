@@ -23,4 +23,34 @@
 		<url-pattern>/poll/create</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>Inscription</servlet-name>
+		<servlet-class>servlets.InscriptionForm</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Inscription</servlet-name>
+		<url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>servlets.LoginForm</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Polls</servlet-name>
+		<servlet-class>servlets.pollsPage</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Polls</servlet-name>
+		<url-pattern>/polls</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

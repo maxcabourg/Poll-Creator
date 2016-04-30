@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,6 +23,14 @@
     	<div class="form-group">
 		    <label for="pseudo">Pseudo : </label>
 		    <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Password : </label>
+		    <input type="password" class="form-control" id="password" placeholder="Password">
+  		</div>
+  		<div class="form-group">
+		    <label for="mail">Email : </label>
+		    <input type="email" class="form-control" id="mail" placeholder="Email">
   		</div>
   		<button type="submit" class="btn btn-default">Submit</button>
     </form>

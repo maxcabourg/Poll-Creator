@@ -21,13 +21,7 @@
   </head>
   <body>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
-    <form method="POST" action="">
-    	<div class="form-group">
-		    <label for="pseudo">Pseudo : </label>
-		    <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
-  		</div>
-  		<button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    <p>TODO : show polls</p>
     <jsp:include page="../views/footer.jsp" />
 
   </body>
