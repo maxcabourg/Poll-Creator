@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import POJO.Comment;
 
 public class CommentDAO extends DAO<Comment> {
+	
+	public CommentDAO() {
+		super();
+	}
 
 	@Override
 	public boolean create(Comment obj) throws SQLException {

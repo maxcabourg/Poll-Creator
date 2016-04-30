@@ -9,6 +9,10 @@ import POJO.Answer;
 import POJO.Poll;
 
 public class AnswerDAO extends DAO<Answer> {
+	
+	public AnswerDAO() {
+		super();
+	}
 
 	@Override
 	public boolean create(Answer answer) throws SQLException {
