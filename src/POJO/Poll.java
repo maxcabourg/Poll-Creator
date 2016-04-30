@@ -7,6 +7,7 @@ public class Poll {
 	private int id;
 	private String question;
 	private List<Answer> answers;
+	private User creator;
 	
 	public Poll(int id, String question, List<Answer> answers) {
 		super();
@@ -38,5 +39,15 @@ public class Poll {
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+	
+	
 	
 }

@@ -17,15 +17,14 @@ public class PollDAO extends DAO<Poll>{
 
 	@Override
 	public boolean create(Poll poll) throws SQLException {
-		stmt = connect.prepareStatement("INSERT INTO Poll VALUES (?, ?)");
-		stmt.setInt(1, poll.getId());
-		stmt.setString(2, poll.getQuestion());
+		stmt = connect.prepareStatement("INSERT INTO Poll (question, id_user) VALUES (?, ?)");
+		stmt.setString(1, poll.getQuestion());
+		stmt.setInt(2, poll.getCreator().getId());
 		stmt.executeUpdate();
 		for(Answer ans : poll.getAnswers()){
-			stmt = connect.prepareStatement("INSERT INTO Answer VALUES (?, ?, ?)");
-			stmt.setInt(1, ans.getId());
-			stmt.setString(2, ans.getContent());
-			stmt.setInt(3, poll.getId());
+			stmt = connect.prepareStatement("INSERT INTO Answer (content, id_poll) VALUES (?, ?)");
+			stmt.setString(1, ans.getContent());
+			stmt.setInt(2, poll.getId());
 			stmt.executeUpdate();
 		}
 		stmt.close();

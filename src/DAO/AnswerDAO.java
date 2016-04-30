@@ -12,6 +12,10 @@ public class AnswerDAO extends DAO<Answer> {
 
 	@Override
 	public boolean create(Answer answer) throws SQLException {
+		stmt = connect.prepareStatement("INSERT INTO Answer (content) VALUES (?)");
+		stmt.setString(1, answer.getContent());
+		stmt.executeUpdate();
+		stmt.close();
 		return true;
 	}
 
