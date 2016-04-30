@@ -9,14 +9,20 @@ import POJO.User;
 
 public class UserDAO extends DAO<User> {
 
+	public UserDAO()
+	{
+		super();
+	}
+	
 	@Override
 	public boolean create(User user) throws SQLException {
 		stmt = connect.prepareStatement("INSERT INTO User (pseudo, password, mail) VALUES (?, ?, ?)");
 		stmt.setString(1, user.getPseudo());
 		stmt.setString(2, user.getPassword());
-		stmt.setString(2, user.getEmail());
+		stmt.setString(3, user.getEmail());
 		stmt.executeUpdate();
 		stmt.close();
+		System.out.println("ici");
 		return true;
 	}
 

@@ -47,6 +47,10 @@ public class User {
 		this.email = email;
 	}
 	
+	public static boolean isValid(){
+		return true;
+	}
+	
 	
 	
 	

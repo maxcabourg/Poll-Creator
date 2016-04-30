@@ -15,7 +15,7 @@ public class Database {
     private static final String PROPERTY_USERNAME 		 = "nomutilisateur";
     private static final String PROPERTY_PASSWORD   	 = "motdepasse";
     
-    private static Connection conn;
+    private Connection conn;
     
     public Database()
     {
@@ -34,18 +34,22 @@ public class Database {
 	        driver = properties.getProperty( PROPERTY_DRIVER );
 	        nomUtilisateur = properties.getProperty( PROPERTY_USERNAME);
 	        motDePasse = properties.getProperty(PROPERTY_PASSWORD);
-	        Connection conn = DriverManager.getConnection(url, nomUtilisateur, motDePasse);
+	        Class.forName(driver);
+	        conn = DriverManager.getConnection(url, nomUtilisateur, motDePasse);
 		} catch (IOException e) {
 			System.out.println("Erreur : fichier de configuration introuvable.");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Erreur lors de la connexion à la base de données.");
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Driver introuvable");
+			e.printStackTrace();
 		}
 		        
     }
     
-    public static Connection getConnexion()
+    public Connection getConnexion()
     {
     	return conn;
     }

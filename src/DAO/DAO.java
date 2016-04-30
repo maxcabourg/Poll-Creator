@@ -9,8 +9,16 @@ import java.util.ArrayList;
 import database.Database;
 
 public abstract class DAO<T> {
-  protected Connection connect = Database.getConnexion();
-  protected PreparedStatement stmt = null;
+
+  protected Database db;
+  protected Connection connect;
+  protected PreparedStatement stmt;
+  
+  public DAO()
+  {
+	  db = new Database();
+	  connect = db.getConnexion();
+  }
    
   /**
   * Inserts a T object in the database
