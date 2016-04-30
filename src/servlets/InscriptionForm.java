@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +24,7 @@ public class InscriptionForm extends HttpServlet{
 		 String pseudo = request.getParameter("pseudo");
 		 String password = request.getParameter("password");
 		 String email = request.getParameter("mail");
-		 System.out.println(pseudo+" "+password+" "+email);
-		 if(User.isValid())
+		 if(User.isValid(pseudo, password, email))
 		 {
 			 User u = new User(0, pseudo, password, email);
 			 UserDAO dao = new UserDAO();
@@ -33,8 +33,15 @@ public class InscriptionForm extends HttpServlet{
 			} catch (SQLException e) {
 				getServletContext().getRequestDispatcher("/WEB-INF/views/SQLerror.jsp").forward(request, response);
 			}
+			getServletContext().getRequestDispatcher("/WEB-INF/views/inscriptionDone.jsp").forward(request, response);
 		 }
-		 getServletContext().getRequestDispatcher("/WEB-INF/views/inscriptionDone.jsp").forward(request, response);
+		 else
+		 {
+			 Map<String, String> errors = User.getErrors(pseudo, password, email);
+			 request.setAttribute("errors", errors);
+			 getServletContext().getRequestDispatcher("/WEB-INF/views/formInscription.jsp").forward(request, response);
+		 }
+		 
 	}
 
 }

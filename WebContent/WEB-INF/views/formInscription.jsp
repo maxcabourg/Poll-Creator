@@ -23,14 +23,18 @@
     	<div class="form-group">
 		    <label for="pseudo">Pseudo : </label>
 		    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
+			${errors.pseudoLength}
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Password : </label>
 		    <input type="password" class="form-control" name="password" placeholder="Password">
+		    ${errors.passwordValidity}
   		</div>
   		<div class="form-group">
 		    <label for="mail">Email : </label>
 		    <input type="email" class="form-control" name="mail" placeholder="Email">
+		    ${errors.mailValidity}<br>
+		    ${errors.mailLength}
   		</div>
   		<button type="submit" class="btn btn-default">Submit</button>
     </form>
