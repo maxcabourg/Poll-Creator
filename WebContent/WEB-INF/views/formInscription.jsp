@@ -21,17 +21,17 @@
   	<jsp:include page="../views/nav/visitorNav.jsp" />
     <form method="POST" action="${pageContext.request.contextPath}/inscription">
     	<div class="form-group">
-		    <label for="pseudo">Pseudo : </label>
+		    <label for="pseudo">Pseudo : </label> It must contain at least 2 characters and 20 characters maximum
 		    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
 			${errors.pseudoLength}
   		</div>
   		<div class="form-group">
-		    <label for="pseudo">Password : </label>
+		    <label for="pseudo">Password : </label> It must contain one character in UPPER case, one in lower case and 1 special character among @#$%^!&+=
 		    <input type="password" class="form-control" name="password" placeholder="Password">
 		    ${errors.passwordValidity}
   		</div>
   		<div class="form-group">
-		    <label for="mail">Email : </label>
+		    <label for="mail"> Email : </label>
 		    <input type="email" class="form-control" name="mail" placeholder="Email">
 		    ${errors.mailValidity}<br>
 		    ${errors.mailLength}
