@@ -22,7 +22,6 @@ public class UserDAO extends DAO<User> {
 		stmt.setString(3, user.getEmail());
 		stmt.executeUpdate();
 		stmt.close();
-		System.out.println("ici");
 		return true;
 	}
 

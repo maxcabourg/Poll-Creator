@@ -6,7 +6,7 @@ import java.util.Map;
 public class User {
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*d)(?=.*[@#$!%])(?=.*[A-Z]).{6,16})";
+	private static final String PASSWORD_PATTERN = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})";
 	private int id;
 	private String pseudo;
 	private String password;
@@ -53,7 +53,7 @@ public class User {
 	}
 	
 	public static boolean isValid(String pseudo, String password, String email){
-		return (pseudo.length() > 20 || email.length() > 50 || !password.matches(User.PASSWORD_PATTERN));
+		return (pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
 	}
 	
 	public static Map<String, String> getErrors(String pseudo, String password, String email)
@@ -66,7 +66,7 @@ public class User {
 		if(email.length() > 50)
 			errors.put("mailLength", "Your email adress must contain 50 characters maximum");
 		if(!password.matches(PASSWORD_PATTERN))
-			errors.put("passwordValidity", "Invalid Password.");
+			errors.put("passwordValidity", "Invalid Password.");		
 		return errors;
 		
 	}
