@@ -27,8 +27,13 @@
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Password : </label> It must contain one character in UPPER case, one in lower case and 1 special character among @#$!% and must have between 6 and 40 characters
-		    <input type="password" class="form-control" name="password" placeholder="Password">
+		    <input type="password" class="form-control" name="password">
 		    ${errors.passwordValidity}
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Confirm password : </label>
+		    <input type="password" class="form-control" name="passwordConfirm">
+		    ${errors.passwordConfirm}
   		</div>
   		<div class="form-group">
 		    <label for="mail"> Email : </label>

@@ -56,7 +56,7 @@ public class User {
 		return (pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
 	}
 	
-	public static Map<String, String> getErrors(String pseudo, String password, String email)
+	public static Map<String, String> getErrors(String pseudo, String password, String passwordConfirm, String email)
 	{
 		Map<String, String> errors = new HashMap<String, String>();
 		if(pseudo.length() > 20 || pseudo.length() <= 2)
@@ -66,7 +66,9 @@ public class User {
 		if(email.length() > 50)
 			errors.put("mailLength", "Your email adress must contain 50 characters maximum");
 		if(!password.matches(PASSWORD_PATTERN))
-			errors.put("passwordValidity", "Invalid Password.");		
+			errors.put("passwordValidity", "Invalid Password.");
+		if(!password.equals(passwordConfirm))
+			errors.put("passwordConfirm", "Password confirmation doesn't match");	
 		return errors;
 		
 	}

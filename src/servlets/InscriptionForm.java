@@ -23,6 +23,7 @@ public class InscriptionForm extends HttpServlet{
 		
 		 String pseudo = request.getParameter("pseudo");
 		 String password = request.getParameter("password");
+		 String passwordConfirm = request.getParameter("passwordConfirm");
 		 String email = request.getParameter("mail");
 		 if(User.isValid(pseudo, password, email))
 		 {
@@ -37,7 +38,7 @@ public class InscriptionForm extends HttpServlet{
 		 }
 		 else
 		 {
-			 Map<String, String> errors = User.getErrors(pseudo, password, email);
+			 Map<String, String> errors = User.getErrors(pseudo, password, passwordConfirm, email);
 			 request.setAttribute("errors", errors);
 			 getServletContext().getRequestDispatcher("/WEB-INF/views/formInscription.jsp").forward(request, response);
 		 }
