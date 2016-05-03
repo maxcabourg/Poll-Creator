@@ -1,5 +1,7 @@
 package DAO;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +20,9 @@ public class UserDAO extends DAO<User> {
 	public boolean create(User user) throws SQLException {
 		stmt = connect.prepareStatement("INSERT INTO User (pseudo, password, mail) VALUES (?, ?, ?)");
 		stmt.setString(1, user.getPseudo());
-		stmt.setString(2, user.getPassword());
+		try {
+			stmt.setString(2, UserDAO.sha1(user.getPassword()));
+		} catch (NoSuchAlgorithmException e) {}
 		stmt.setString(3, user.getEmail());
 		stmt.executeUpdate();
 		stmt.close();
@@ -72,6 +76,15 @@ public class UserDAO extends DAO<User> {
 		stmt.close();
 		return listUsers;
 	}
-
+	
+	private static String sha1(String input) throws NoSuchAlgorithmException {
+        MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+        byte[] result = mDigest.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < result.length; i++) {
+            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+        }       
+        return sb.toString();
+	}
 
 }
