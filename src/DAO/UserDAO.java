@@ -86,5 +86,29 @@ public class UserDAO extends DAO<User> {
         }       
         return sb.toString();
 	}
+	
+	/**
+	 * Checks in the couple (pseudo, password) matches an entry of the User table in Database
+	 * @param pseudo Name of the user
+	 * @param password Password of the user : <strong>non encrypted</strong>
+	 * @return true it matches an entry, false otherwise
+	 * @throws SQLException if there's a problem with the request
+	 */
+	public boolean existsInDabatase(String pseudo, String password) throws SQLException{
+		stmt = connect.prepareStatement("SELECT password FROM User WHERE pseudo = '"+pseudo+"'");
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next())
+		{
+			String pwd = rs.getString("password");
+			try {
+				if(pwd.equals(UserDAO.sha1(password)))
+					return true;
+				return false;
+			} catch (NoSuchAlgorithmException e) {}
+		}
+		else	
+			return false;
+		return false;
+	}
 
 }

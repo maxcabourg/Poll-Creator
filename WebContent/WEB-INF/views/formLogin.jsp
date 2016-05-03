@@ -19,16 +19,17 @@
   </head>
   <body>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
-    <form method="POST" action="">
+    <form method="POST" action="${pageContext.request.contextPath}/login">
     	<div class="form-group">
 		    <label for="pseudo">Pseudo : </label>
-		    <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
+		    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Password : </label>
-		    <input type="password" class="form-control" id="password" placeholder="Password">
+		    <input type="password" class="form-control" name="password" placeholder="Password">
   		</div>
   		<button type="submit" class="btn btn-default">Submit</button>
+  		${error}
     </form>
     <jsp:include page="../views/footer.jsp" />
 
