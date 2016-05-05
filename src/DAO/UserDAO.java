@@ -54,13 +54,34 @@ public class UserDAO extends DAO<User> {
 		stmt = connect.prepareStatement("SELECT * FROM User WHERE id_user = ?");
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
-		int id_user = rs.getInt("id_answer");
-		String pseudo = rs.getString("pseudo");
-		String password = rs.getString("password");
-		String email = rs.getString("email");
-		rs.close();
-		stmt.close();
-		return new User(id_user, pseudo, password, email);
+		if(rs.next()){
+			int id_user = rs.getInt("id_user");
+			String pseudo = rs.getString("pseudo");
+			String password = rs.getString("password");
+			String email = rs.getString("mail");
+			rs.close();
+			stmt.close();
+			return new User(id_user, pseudo, password, email);
+		}
+		else
+			return null;
+	}
+	
+	public User find(String name) throws SQLException {
+		stmt = connect.prepareStatement("SELECT * FROM User WHERE pseudo = ?");
+		stmt.setString(1, name);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()){
+			int id_user = rs.getInt("id_user");
+			String pseudo = rs.getString("pseudo");
+			String password = rs.getString("password");
+			String email = rs.getString("mail");
+			rs.close();
+			stmt.close();
+			return new User(id_user, pseudo, password, email);
+		}
+		else
+			return null;
 	}
 	
 	@Override

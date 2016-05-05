@@ -20,8 +20,9 @@
     <![endif]-->
   </head>
   <body>
+  	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
-    <h1>Hello world !</h1>
+    <h1>Hello <c:out value="${user.pseudo}" /></h1>
     <jsp:include page="../views/footer.jsp" />
 
   </body>

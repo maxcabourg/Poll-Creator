@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.UserDAO;
 
 public class LoginForm extends HttpServlet{
+	
+	public static final String LOGIN_COOKIE_NAME = "userConnected";
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
@@ -24,10 +27,15 @@ public class LoginForm extends HttpServlet{
 		 UserDAO dao = new UserDAO();
 		 try {
 			if(dao.existsInDabatase(pseudo, password))
+			{
+				Cookie cookie = new Cookie(LOGIN_COOKIE_NAME,pseudo);
+				cookie.setPath("/");
+				cookie.setMaxAge(60*60); //1 hour
+				response.addCookie(cookie);
 				getServletContext().getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(request, response);
+			}
 			else
 			{
-				System.out.println("existe pas");
 				request.setAttribute("error", "Invalid pseudo or password");
 				getServletContext().getRequestDispatcher("/WEB-INF/views/formLogin.jsp").forward(request, response);
 			}

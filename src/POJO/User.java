@@ -52,6 +52,11 @@ public class User {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", pseudo=" + pseudo + ", password=" + password + ", email=" + email + "]";
+	}
+
 	public static boolean isValid(String pseudo, String password, String email){
 		return (pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
 	}
