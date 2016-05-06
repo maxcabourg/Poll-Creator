@@ -10,6 +10,12 @@ public class Answer {
 		this.id = id;
 		this.content = content;
 	}
+	
+	public Answer(String content) {
+		super();
+		this.id = -1;
+		this.content = content;
+	}
 
 	public int getId() {
 		return id;

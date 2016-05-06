@@ -24,27 +24,28 @@
     <jsp:include page="../views/nav/loggedNav.jsp" />
     <form method="POST" action="">
     	<div class="form-group">
-		    <label for="pseudo">Question : </label>
-		    <input type="text" class="form-control" id="question" required>
+		    <label for="pseudo">Question : *</label>
+		    <input type="text" class="form-control" name="question" required>
   		</div>
   		<div class="form-group">
-		    <label for="pseudo">Answer 1 : </label>
-		    <input type="text" class="form-control" id="answer1" required>
+		    <label for="pseudo">Answer 1 : *</label>
+		    <input type="text" class="form-control" name="answer1" required>
   		</div>
   		<div class="form-group">
-		    <label for="pseudo">Answer 2 : </label>
-		    <input type="text" class="form-control" id="answer2">
+		    <label for="pseudo">Answer 2 : *</label>
+		    <input type="text" class="form-control" name="answer2" required>
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Answer 3 : </label>
-		    <input type="text" class="form-control" id="answer3">
+		    <input type="text" class="form-control" name="answer3">
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Answer 4 : </label>
-		    <input type="text" class="form-control" id="answer4">
+		    <input type="text" class="form-control" name="answer4">
   		</div>
   		<button type="submit" class="btn btn-default">Create !</button>
     </form>
+    <p><strong>*</strong> : required field</p>
     <jsp:include page="../views/footer.jsp" />
 
   </body>

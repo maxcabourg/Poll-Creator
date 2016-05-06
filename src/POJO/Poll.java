@@ -9,9 +9,24 @@ public class Poll {
 	private List<Answer> answers;
 	private User creator;
 	
+	public Poll(int id, String question, List<Answer> answers, User creator) {
+		super();
+		this.id = id;
+		this.question = question;
+		this.answers = answers;
+		this.creator = creator;
+	}
+	
 	public Poll(int id, String question, List<Answer> answers) {
 		super();
 		this.id = id;
+		this.question = question;
+		this.answers = answers;
+	}
+	
+	public Poll(String question, List<Answer> answers) {
+		super();
+		this.id = -1;
 		this.question = question;
 		this.answers = answers;
 	}
