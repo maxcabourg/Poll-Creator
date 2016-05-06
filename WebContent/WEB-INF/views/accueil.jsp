@@ -21,7 +21,11 @@
   </head>
   <body>
   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-  	<jsp:include page="../views/nav/visitorNav.jsp" />
+  	<c:choose>
+    	<c:when test="${empty user}"><jsp:include page="../views/nav/visitorNav.jsp" /></c:when>
+    	<c:otherwise><jsp:include page="../views/nav/loggedNav.jsp" /></c:otherwise>
+	</c:choose>
+  	
     <h1>Hello <c:out value="${user.pseudo}" /></h1>
     <jsp:include page="../views/footer.jsp" />
 

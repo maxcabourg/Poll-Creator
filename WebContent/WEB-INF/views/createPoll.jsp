@@ -20,13 +20,30 @@
     <![endif]-->
   </head>
   <body>
-  	<jsp:include page="../views/nav/visitorNav.jsp" />
+
+    <jsp:include page="../views/nav/loggedNav.jsp" />
     <form method="POST" action="">
     	<div class="form-group">
-		    <label for="pseudo">Pseudo : </label>
-		    <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
+		    <label for="pseudo">Question : </label>
+		    <input type="text" class="form-control" id="question" required>
   		</div>
-  		<button type="submit" class="btn btn-default">Submit</button>
+  		<div class="form-group">
+		    <label for="pseudo">Answer 1 : </label>
+		    <input type="text" class="form-control" id="answer1" required>
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Answer 2 : </label>
+		    <input type="text" class="form-control" id="answer2">
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Answer 3 : </label>
+		    <input type="text" class="form-control" id="answer3">
+  		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Answer 4 : </label>
+		    <input type="text" class="form-control" id="answer4">
+  		</div>
+  		<button type="submit" class="btn btn-default">Create !</button>
     </form>
     <jsp:include page="../views/footer.jsp" />
 

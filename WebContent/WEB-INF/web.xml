@@ -58,4 +58,14 @@
 		<url-pattern>/polls</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>Disconnect</servlet-name>
+		<servlet-class>servlets.Disconnect</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Disconnect</servlet-name>
+		<url-pattern>/disconnect</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

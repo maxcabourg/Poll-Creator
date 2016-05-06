@@ -6,7 +6,6 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="${pageContext.request.contextPath}/accueil">Home</a></li>
       <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/polls">See polls</a></li>
       <li><a href="${pageContext.request.contextPath}/inscription">Sign in</a></li>
     </ul>
   </div>
