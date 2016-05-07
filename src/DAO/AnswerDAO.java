@@ -47,11 +47,17 @@ public class AnswerDAO extends DAO<Answer> {
 		stmt = connect.prepareStatement("SELECT * FROM Answer WHERE id_answer = ?");
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
-		int answer_id = rs.getInt("id_answer");
-		String content = rs.getString("content");
-		rs.close();
-		stmt.close();
-		return new Answer(answer_id, content);
+		if(rs.next())
+		{
+			int answer_id = rs.getInt("id_answer");
+			String content = rs.getString("content");
+			int id_poll = rs.getInt("id_poll");
+			rs.close();
+			stmt.close();
+			return new Answer(answer_id, content, id_poll);
+		}
+		else
+			return null;
 	}
 
 	@Override

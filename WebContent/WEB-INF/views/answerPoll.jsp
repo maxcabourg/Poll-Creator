@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Answer the poll</title>
 
     <!-- Bootstrap -->
     <link type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet">
@@ -20,33 +20,17 @@
     <![endif]-->
   </head>
   <body>
-
+  	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <jsp:include page="../views/nav/loggedNav.jsp" />
-    <form method="POST" action="">
-    	<div class="form-group">
-		    <label for="question">Question : *</label>
-		    <input type="text" class="form-control" name="question" required>
-  		</div>
+    <h2>${poll.question}</h2>
+    <form method="POST" action="${pageContext.request.contextPath}/answerPoll">
+  	<c:forEach items="${poll.answers}" var="answer">
   		<div class="form-group">
-		    <label for="answer1">Answer 1 : *</label>
-		    <input type="text" class="form-control" name="answer1" required>
-  		</div>
-  		<div class="form-group">
-		    <label for="answer2">Answer 2 : *</label>
-		    <input type="text" class="form-control" name="answer2" required>
-  		</div>
-  		<div class="form-group">
-		    <label for="answer3">Answer 3 : </label>
-		    <input type="text" class="form-control" name="answer3">
-  		</div>
-  		<div class="form-group">
-		    <label for="answer4">Answer 4 : </label>
-		    <input type="text" class="form-control" name="answer4">
-  		</div>
-  		<button type="submit" class="btn btn-default">Create !</button>
+		    <input type="radio" name="answer" value="${answer.id}">${answer.content}<br>
+  		</div>	
+  	</c:forEach>
+  	<button type="submit" class="btn btn-default">Answer !</button>
     </form>
-    <p><strong>*</strong> : required field</p>
     <jsp:include page="../views/footer.jsp" />
 
   </body>
-</html>

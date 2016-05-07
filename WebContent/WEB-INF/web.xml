@@ -68,4 +68,33 @@
 		<url-pattern>/disconnect</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>pollDisplayer</servlet-name>
+		<servlet-class>servlets.PollDisplayer</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>pollDisplayer</servlet-name>
+		<url-pattern>/poll/get</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>answerPoll</servlet-name>
+		<servlet-class>servlets.AnswerPoll</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>answerPoll</servlet-name>
+		<url-pattern>/answerPoll</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+    <display-name>Restrict direct access to certain folders</display-name>
+    <web-resource-collection>
+        <web-resource-name>Restricted folders</web-resource-name>
+        <url-pattern>/answer</url-pattern>
+    </web-resource-collection>
+    <auth-constraint />
+	</security-constraint>
+	
 </web-app>

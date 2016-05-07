@@ -20,33 +20,9 @@
     <![endif]-->
   </head>
   <body>
-
+  	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <jsp:include page="../views/nav/loggedNav.jsp" />
-    <form method="POST" action="">
-    	<div class="form-group">
-		    <label for="question">Question : *</label>
-		    <input type="text" class="form-control" name="question" required>
-  		</div>
-  		<div class="form-group">
-		    <label for="answer1">Answer 1 : *</label>
-		    <input type="text" class="form-control" name="answer1" required>
-  		</div>
-  		<div class="form-group">
-		    <label for="answer2">Answer 2 : *</label>
-		    <input type="text" class="form-control" name="answer2" required>
-  		</div>
-  		<div class="form-group">
-		    <label for="answer3">Answer 3 : </label>
-		    <input type="text" class="form-control" name="answer3">
-  		</div>
-  		<div class="form-group">
-		    <label for="answer4">Answer 4 : </label>
-		    <input type="text" class="form-control" name="answer4">
-  		</div>
-  		<button type="submit" class="btn btn-default">Create !</button>
-    </form>
-    <p><strong>*</strong> : required field</p>
+    <h1>TODO : display stats</h1>
     <jsp:include page="../views/footer.jsp" />
 
   </body>
-</html>

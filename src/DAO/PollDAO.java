@@ -61,15 +61,20 @@ public class PollDAO extends DAO<Poll>{
 		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_poll = ?");
 		stmt.setInt(1, id);
 		ResultSet rs = stmt.executeQuery();
-		int poll_id = rs.getInt("id_poll");
-		String question = rs.getString("question");
-		rs.close();
-		rs = stmt.executeQuery("SELECT * FROM Answer WHERE id_poll = "+id);
-		while(rs.next())
-			listAnswers.add(new Answer(rs.getInt("id_answer"), rs.getString("answer")));
-		rs.close();
-		stmt.close();
-		return new Poll(poll_id, question, listAnswers);
+		if(rs.next())
+		{
+			int poll_id = rs.getInt("id_poll");
+			String question = rs.getString("question");
+			rs.close();
+			rs = stmt.executeQuery("SELECT * FROM Answer WHERE id_poll = "+id);
+			while(rs.next())
+				listAnswers.add(new Answer(rs.getInt("id_answer"), rs.getString("content")));
+			rs.close();
+			stmt.close();
+			return new Poll(poll_id, question, listAnswers);
+		}
+		else
+			return null;
 	}
 
 	@Override
