@@ -21,11 +21,7 @@ public class PollDAO extends DAO<Poll>{
 		stmt.setString(1, poll.getQuestion());
 		stmt.setInt(2, poll.getCreator().getId());
 		stmt.executeUpdate();
-		stmt = connect.prepareStatement("SELECT COUNT(*) as maxCount FROM Poll");
-		ResultSet rs = stmt.executeQuery();
-		int maxId = 0;
-		if(rs.next())
-			maxId = rs.getInt("maxCount");
+		int maxId = findMaxId();
 		for(Answer ans : poll.getAnswers()){
 			stmt = connect.prepareStatement("INSERT INTO Answer (content, id_poll) VALUES (?, ?)");
 			stmt.setString(1, ans.getContent());
@@ -89,6 +85,16 @@ public class PollDAO extends DAO<Poll>{
 		rs.close();
 		stmt.close();
 		return listPolls;
+	}
+	
+	public int findMaxId() throws SQLException
+	{
+		stmt = connect.prepareStatement("SELECT COUNT(*) as maxCount FROM Poll");
+		ResultSet rs = stmt.executeQuery();
+		int maxId = 0;
+		if(rs.next())
+			maxId = rs.getInt("maxCount");
+		return maxId;
 	}
 
 }

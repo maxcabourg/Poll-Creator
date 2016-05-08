@@ -82,11 +82,13 @@ public class PollForm extends HttpServlet{
 			 Poll poll = new Poll(0, question, answers, u);
 			 PollDAO dao = new PollDAO();
 			 dao.create(poll);
+			 int maxId = dao.findMaxId();
+			 request.setAttribute("idPoll", maxId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			getServletContext().getRequestDispatcher("/WEB-INF/views/SQLerror.jsp").forward(request, response);
 		}	 
-		 getServletContext().getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(request, response);
+		 getServletContext().getRequestDispatcher("/WEB-INF/views/showPollLink.jsp").forward(request, response);
 	}
 
 }

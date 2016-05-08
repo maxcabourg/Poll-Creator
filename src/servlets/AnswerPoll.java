@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.AnswerDAO;
+import DAO.CommentDAO;
 import DAO.PollDAO;
 import DAO.UserAnswerDAO;
 import DAO.UserDAO;
 import POJO.Answer;
+import POJO.Comment;
 import POJO.Poll;
 import POJO.User;
 import POJO.UserAnswer;
@@ -30,6 +32,7 @@ public class AnswerPoll extends HttpServlet{
 		try 
 		{
 			String id = request.getParameter("answer");
+			String comment = request.getParameter("comment");
 			int idChosenAnswer = Integer.parseInt(id);
 			UserAnswerDAO userAnswerDao = new UserAnswerDAO();
 			UserDAO userDao = new UserDAO();
@@ -51,6 +54,12 @@ public class AnswerPoll extends HttpServlet{
 				UserAnswer ua = new UserAnswer(u.getId(), answer.getId_poll(), answer.getId());
 				userAnswerDao.create(ua);
 				request.setAttribute("poll", poll);
+				if(comment.length() > 0 && comment != null)
+				{
+					CommentDAO commentDAO = new CommentDAO();
+					Comment commentary = new Comment(comment, u.getId(), poll.getId());
+					commentDAO.create(commentary);
+				}
 				getServletContext().getRequestDispatcher("/WEB-INF/views/seePollStats.jsp").forward(request, response);
 			}
 		}

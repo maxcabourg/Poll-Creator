@@ -24,12 +24,16 @@
     <jsp:include page="../views/nav/loggedNav.jsp" />
     <h2>${poll.question}</h2>
     <form method="POST" action="${pageContext.request.contextPath}/answerPoll">
-  	<c:forEach items="${poll.answers}" var="answer">
-  		<div class="form-group">
-		    <input type="radio" name="answer" value="${answer.id}">${answer.content}<br>
-  		</div>	
-  	</c:forEach>
-  	<button type="submit" class="btn btn-default">Answer !</button>
+	  	<c:forEach items="${poll.answers}" var="answer">
+	  		<div class="form-group">
+			    <input type="radio" name="answer" value="${answer.id}">${answer.content}<br>
+	  		</div>	
+	  	</c:forEach>
+	  	<div class="form-group">
+		    <label for="comment">Leave a comment : </label><br>
+		    <textarea name="comment" maxlength=100 cols=20 rows=5>Your comment...</textarea>
+	  	</div>
+	  	<button type="submit" class="btn btn-default">Answer !</button>
     </form>
     <jsp:include page="../views/footer.jsp" />
 
