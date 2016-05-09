@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Statistics</title>
 
     <!-- Bootstrap -->
     <link type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet">
@@ -22,7 +22,13 @@
   <body>
   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <jsp:include page="../views/nav/loggedNav.jsp" />
-    <h1>TODO : display stats</h1>
+    <c:forEach items="${rates}" var="rate" varStatus="index">
+  		<p>${rate} % answered ${answers[index.index].content}</p><br>
+  	</c:forEach>
+    <h2>Comments : </h2>
+    <c:forEach items="${allComments}" var="comment" varStatus="index">
+  		<p><strong>${allUsers[index.index].pseudo}</strong> said : ${comment.content} </p><br>
+  	</c:forEach>
     <jsp:include page="../views/footer.jsp" />
 
   </body>

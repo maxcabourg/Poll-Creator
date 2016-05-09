@@ -59,6 +59,23 @@ public class AnswerDAO extends DAO<Answer> {
 		else
 			return null;
 	}
+	
+	public ArrayList<Answer> findByPoll(Poll poll) throws SQLException {
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		stmt = connect.prepareStatement("SELECT * FROM Answer WHERE id_poll = ?");
+		stmt.setInt(1, poll.getId());
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next())
+		{
+			int answer_id = rs.getInt("id_answer");
+			String content = rs.getString("content");
+			int id_poll = rs.getInt("id_poll");			
+			answers.add(new Answer(answer_id, content, id_poll));
+		}
+		stmt.close();
+		rs.close();
+		return answers;
+	}
 
 	@Override
 	public ArrayList<Answer> getAll() throws SQLException {

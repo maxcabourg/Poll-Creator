@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import POJO.Answer;
+import POJO.Poll;
 import POJO.UserAnswer;
 
 public class UserAnswerDAO extends DAO<UserAnswer>{
@@ -58,6 +60,39 @@ public class UserAnswerDAO extends DAO<UserAnswer>{
 			stmt.close();
 			return null;
 		}	
+	}
+	
+	private int getNumberAnswersSubmitted(Poll poll) throws SQLException{
+		stmt = connect.prepareStatement("SELECT COUNT(*) as numberAnswers FROM UserAnswer WHERE id_poll = ?");
+		stmt.setInt(1, poll.getId());
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next())
+		{
+			int count = rs.getInt("numberAnswers");
+			rs.close();
+			stmt.close();
+			return count;
+		}
+		else
+			return -1;
+	}
+	
+	public double getAnswersRates(Poll poll, Answer answer) throws SQLException
+	{
+		int count = getNumberAnswersSubmitted(poll);
+		if(count != -1)
+		{
+			stmt = connect.prepareStatement("SELECT COUNT(*) as numberAnswers FROM UserAnswer WHERE id_poll = ? AND id_answer = ?");
+			stmt.setInt(1, poll.getId());
+			stmt.setInt(2, answer.getId());
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next())
+				return (double)((double)(rs.getInt("numberAnswers")) / (double)(count) * 100);
+			else
+				return -1;
+		}
+		else
+			return -1;
 	}
 
 	@Override

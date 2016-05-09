@@ -60,5 +60,27 @@ public class CommentDAO extends DAO<Comment> {
 	public ArrayList<Comment> getAll() throws SQLException {
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param idPoll poll which we want to get the comments
+	 * @return an arrayList containing all the comments concerning the poll
+	 * @throws SQLException if the request fails
+	 */
+	public ArrayList<Comment> getAll(int idPoll) throws SQLException {
+		ArrayList<Comment> allComments = new ArrayList<Comment>();
+		stmt = connect.prepareStatement("SELECT * FROM Comment WHERE id_poll = ?");
+		stmt.setInt(1, idPoll);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next())
+		{
+			int id_comment = rs.getInt("id_comment");
+			String content = rs.getString("content");
+			int id_user = rs.getInt("id_user");
+			allComments.add(new Comment(id_comment, content, id_user, idPoll));
+		}
+		stmt.close();
+		return allComments;
+	}
 
 }

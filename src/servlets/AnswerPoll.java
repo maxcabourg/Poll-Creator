@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -54,12 +55,24 @@ public class AnswerPoll extends HttpServlet{
 				UserAnswer ua = new UserAnswer(u.getId(), answer.getId_poll(), answer.getId());
 				userAnswerDao.create(ua);
 				request.setAttribute("poll", poll);
+				CommentDAO commentDAO = new CommentDAO();
 				if(comment.length() > 0 && comment != null)
-				{
-					CommentDAO commentDAO = new CommentDAO();
+				{			
 					Comment commentary = new Comment(comment, u.getId(), poll.getId());
 					commentDAO.create(commentary);
 				}
+				ArrayList<Comment> allComments = commentDAO.getAll(poll.getId());
+				ArrayList<User> allUsers = new ArrayList<User>();
+				for(int i = 0; i<allComments.size(); i++)
+					allUsers.add(userDao.find(allComments.get(i).getId_user()));
+				ArrayList<Answer> answers = answerDAO.findByPoll(poll);
+				ArrayList<Double> rates = new ArrayList<Double>();
+				for(Answer ans : answers)
+					rates.add(userAnswerDao.getAnswersRates(poll, ans));
+				request.setAttribute("allComments", allComments);
+				request.setAttribute("allUsers", allUsers);
+				request.setAttribute("answers", answers);
+				request.setAttribute("rates", rates);
 				getServletContext().getRequestDispatcher("/WEB-INF/views/seePollStats.jsp").forward(request, response);
 			}
 		}
