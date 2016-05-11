@@ -49,13 +49,13 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>Polls</servlet-name>
-		<servlet-class>servlets.pollsPage</servlet-class>
+		<servlet-name>Profile</servlet-name>
+		<servlet-class>servlets.Profile</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Polls</servlet-name>
-		<url-pattern>/polls</url-pattern>
+		<servlet-name>Profile</servlet-name>
+		<url-pattern>/profile</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -86,6 +86,16 @@
 	<servlet-mapping>
 		<servlet-name>answerPoll</servlet-name>
 		<url-pattern>/answerPoll</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>deletePoll</servlet-name>
+		<servlet-class>servlets.DeletePoll</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>deletePoll</servlet-name>
+		<url-pattern>/poll/delete</url-pattern>
 	</servlet-mapping>
 	
 	<security-constraint>

@@ -8,6 +8,7 @@ import java.util.List;
 
 import POJO.Answer;
 import POJO.Poll;
+import POJO.User;
 
 public class PollDAO extends DAO<Poll>{
 
@@ -22,6 +23,7 @@ public class PollDAO extends DAO<Poll>{
 		stmt.setInt(2, poll.getCreator().getId());
 		stmt.executeUpdate();
 		int maxId = findMaxId();
+		System.out.println("max id = "+maxId);
 		for(Answer ans : poll.getAnswers()){
 			stmt = connect.prepareStatement("INSERT INTO Answer (content, id_poll) VALUES (?, ?)");
 			stmt.setString(1, ans.getContent());
@@ -72,6 +74,19 @@ public class PollDAO extends DAO<Poll>{
 		else
 			return null;
 	}
+	
+	public ArrayList<Poll> findByUser(User user) throws SQLException{
+		ArrayList<Poll> polls = new ArrayList<Poll>();
+		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_user = ?");
+		stmt.setInt(1, user.getId());
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next())
+		{
+			int id_poll = rs.getInt("id_poll");
+			polls.add(find(id_poll));
+		}
+			return polls;
+	}
 
 	@Override
 	public ArrayList<Poll> getAll() throws SQLException {
@@ -89,12 +104,21 @@ public class PollDAO extends DAO<Poll>{
 	
 	public int findMaxId() throws SQLException
 	{
-		stmt = connect.prepareStatement("SELECT COUNT(*) as maxCount FROM Poll");
+		stmt = connect.prepareStatement("SELECT MAX(id_poll) as maxCount FROM Poll");
 		ResultSet rs = stmt.executeQuery();
 		int maxId = 0;
 		if(rs.next())
 			maxId = rs.getInt("maxCount");
 		return maxId;
+	}
+	
+	public boolean isCreatedBy(Poll p, User u) throws SQLException
+	{
+		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_user = ? and id_poll = ?");
+		stmt.setInt(1, u.getId());
+		stmt.setInt(2,  p.getId());
+		ResultSet rs = stmt.executeQuery();
+		return rs.next();
 	}
 
 }

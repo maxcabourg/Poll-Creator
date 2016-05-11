@@ -61,10 +61,14 @@ public class User {
 		return (pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
 	}
 	
+	public boolean validUpdate(){
+		return (pseudo.length() < 20 && pseudo.length() >= 2 && email.length() <= 50 && email.matches(EMAIL_PATTERN));
+	}
+	
 	public static Map<String, String> getErrors(String pseudo, String password, String passwordConfirm, String email)
 	{
 		Map<String, String> errors = new HashMap<String, String>();
-		if(pseudo.length() > 20 || pseudo.length() <= 2)
+		if(pseudo.length() > 20 || pseudo.length() < 2)
 			errors.put("pseudoLength", "Name must at least contain 2 characters and 20 maximum.");
 		if(!email.matches(EMAIL_PATTERN))
 			errors.put("mailValidity", "Invalid email.");
