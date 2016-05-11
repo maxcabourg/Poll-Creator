@@ -26,7 +26,7 @@
 			${errors.pseudoLength}
   		</div>
   		<div class="form-group">
-		    <label for="pseudo">Password : </label> It must contain one character in UPPER case, one in lower case and 1 special character among @#$!% and must have between 6 and 40 characters
+		    <label for="pseudo">Password : </label> It must contain at least one number, one character in UPPER case, one in lower case and 1 special character among @#$!% and must have between 6 and 40 characters
 		    <input type="password" class="form-control" name="password">
 		    ${errors.passwordValidity}
   		</div>
