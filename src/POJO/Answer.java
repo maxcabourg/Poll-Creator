@@ -1,5 +1,16 @@
 package POJO;
 
+/**
+ * POJO representing an answer.
+ * It is composed of  :<br>
+ * <ul>
+ * 	<li>an id</li>
+ *  <li>the content of the answer</li>
+ *  <li>the id of the poll concerned</li>
+ * </ul>
+ * @author Max Cabourg
+ *
+ */
 public class Answer {
 	
 	private int id;

@@ -9,15 +9,28 @@ import java.util.ArrayList;
 import POJO.Answer;
 import POJO.User;
 
+/**
+ * DAO made to manage users in the database
+ * @author Max Cabourg
+ *
+ */
 public class UserDAO extends DAO<User> {
 
+	/**
+	 * Basic constructor
+	 */
 	public UserDAO()
 	{
 		super();
 	}
 	
 	@Override
-	public boolean create(User user) throws SQLException {
+	/**
+	 * Inserts an user in the database
+	 * @param user the user to insert
+	 * @throws SQLException
+	 */
+	public void create(User user) throws SQLException {
 		stmt = connect.prepareStatement("INSERT INTO User (pseudo, password, mail) VALUES (?, ?, ?)");
 		stmt.setString(1, user.getPseudo());
 		try {
@@ -26,19 +39,27 @@ public class UserDAO extends DAO<User> {
 		stmt.setString(3, user.getEmail());
 		stmt.executeUpdate();
 		stmt.close();
-		return true;
 	}
 
 	@Override
-	public boolean delete(User user) throws SQLException {
+	/**
+	 * Deletes an user in the database
+	 * @user the user to delete
+	 * @throws SQLException
+	 */
+	public void delete(User user) throws SQLException {
 		stmt = connect.prepareStatement("DELETE FROM User WHERE id_user = "+user.getId());
 		stmt.executeUpdate();
 		stmt.close();
-		return true;
 	}
 
 	@Override
-	public boolean update(User user) throws SQLException {
+	/**
+	 * Updates an user in the database
+	 * @param user the user to update
+	 * @throws SQLException
+	 */
+	public void update(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		stmt = connect.prepareStatement("UPDATE User SET pseudo = ?, password = ?, mail = ?");
 		stmt.setString(1, user.getPseudo());
@@ -46,10 +67,15 @@ public class UserDAO extends DAO<User> {
 		stmt.setString(3, user.getEmail());
 		stmt.executeUpdate();
 		stmt.close();
-		return false;
 	}
 
 	@Override
+	/**
+	 * Finds an user thanks to the provided id
+	 * @param id the id of the user to find in the database
+	 * @return the user found in the database, null if not found
+	 * @throws SQLException
+	 */
 	public User find(int id) throws SQLException {
 		stmt = connect.prepareStatement("SELECT * FROM User WHERE id_user = ?");
 		stmt.setInt(1, id);
@@ -67,6 +93,12 @@ public class UserDAO extends DAO<User> {
 			return null;
 	}
 	
+	/**
+	 * Finds an user in the database thanks to his name
+	 * @param name name of the user to search
+	 * @return an instance of user, null if not found
+	 * @throws SQLException
+	 */
 	public User find(String name) throws SQLException {
 		stmt = connect.prepareStatement("SELECT * FROM User WHERE pseudo = ?");
 		stmt.setString(1, name);
@@ -85,6 +117,11 @@ public class UserDAO extends DAO<User> {
 	}
 	
 	@Override
+	/**
+	 * Gets all the user in the database
+	 * @return an ArrayList containing all the users
+	 * @throws SQLException
+	 */
 	public ArrayList<User> getAll() throws SQLException {
 		ArrayList<User> listUsers = new ArrayList<User>();
 		stmt = connect.prepareStatement("SELECT COUNT(*) as count FROM User");

@@ -1,5 +1,17 @@
 package POJO;
 
+/**
+ * POJO representing a comment.
+ * It is composed of : <br>
+ * <ul>
+ * 	<li>an id</li>
+ *  <li> the content of the comment </li>
+ *  <li> the id of the user concerned</li>
+ *  <li> the id of the poll concerned</li>
+ * <ul>
+ * @author Max Cabourg
+ *
+ */
 public class Comment {
 
 	private int id;

@@ -10,14 +10,27 @@ import POJO.Answer;
 import POJO.Poll;
 import POJO.User;
 
+/**
+ * DAO made to manage Poll in the database
+ * @author Max Cabourg
+ *
+ */
 public class PollDAO extends DAO<Poll>{
 
+	/**
+	 * Basic constructor
+	 */
 	public PollDAO() {
 		super();
 	}
 
 	@Override
-	public boolean create(Poll poll) throws SQLException {
+	/**
+	 * Inserts a poll in the database
+	 * @param poll the poll to insert
+	 * @throws SQLException
+	 */
+	public void create(Poll poll) throws SQLException {
 		stmt = connect.prepareStatement("INSERT INTO Poll (question, id_user) VALUES (?, ?)");
 		stmt.setString(1, poll.getQuestion());
 		stmt.setInt(2, poll.getCreator().getId());
@@ -31,29 +44,42 @@ public class PollDAO extends DAO<Poll>{
 			stmt.executeUpdate();
 		}
 		stmt.close();
-		return true;
 	}
 
 	@Override
-	public boolean delete(Poll poll) throws SQLException {
+	/**
+	 * Deletes a comment in the database
+	 * @param poll the poll to delete
+	 * @throws SQLException
+	 */
+	public void delete(Poll poll) throws SQLException {
 		stmt = connect.prepareStatement("DELETE FROM Poll WHERE id_poll = ?");
 		stmt.setInt(1,  poll.getId());
 		stmt.executeUpdate();
 		stmt.close();
-		return true;
 	}
 
 	@Override
-	public boolean update(Poll poll) throws SQLException {
+	/**
+	 * Updates a comment in the database
+	 * @poll the poll to update
+	 * @throws SQLException
+	 */
+	public void update(Poll poll) throws SQLException {
 		stmt = connect.prepareStatement("UPDATE Poll SET question = ? WHERE id_poll = ?");
 		stmt.setString(1, poll.getQuestion());
 		stmt.setInt(2, poll.getId());
 		stmt.executeUpdate();
 		stmt.close();
-		return true;
 	}
 
 	@Override
+	/**
+	 * Finds a poll in the database thanks to the provided id
+	 * @param id the id of the poll to seek
+	 * @return the poll associated to the id, null if not found
+	 * @throws SQLException
+	 */
 	public Poll find(int id) throws SQLException{
 		List<Answer> listAnswers = new ArrayList<Answer>();
 		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_poll = ?");
@@ -75,6 +101,12 @@ public class PollDAO extends DAO<Poll>{
 			return null;
 	}
 	
+	/**
+	 * Finds all the polls created by an user
+	 * @param user the concerned user
+	 * @return an ArrayList containing all the polls created by the user
+	 * @throws SQLException
+	 */
 	public ArrayList<Poll> findByUser(User user) throws SQLException{
 		ArrayList<Poll> polls = new ArrayList<Poll>();
 		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_user = ?");
@@ -89,6 +121,11 @@ public class PollDAO extends DAO<Poll>{
 	}
 
 	@Override
+	/**
+	 * Gets all the poll created
+	 * @return an ArrayList containing all the polls created
+	 * @throws SQLException
+	 */
 	public ArrayList<Poll> getAll() throws SQLException {
 		ArrayList<Poll> listPolls = new ArrayList<Poll>();
 		stmt = connect.prepareStatement("SELECT COUNT(*) as count FROM Poll");
@@ -102,6 +139,11 @@ public class PollDAO extends DAO<Poll>{
 		return listPolls;
 	}
 	
+	/**
+	 * Finds the maximum poll id in the database
+	 * @return the maximum id
+	 * @throws SQLException
+	 */
 	public int findMaxId() throws SQLException
 	{
 		stmt = connect.prepareStatement("SELECT MAX(id_poll) as maxCount FROM Poll");
@@ -112,6 +154,13 @@ public class PollDAO extends DAO<Poll>{
 		return maxId;
 	}
 	
+	/**
+	 * Checks if an user has created a special poll
+	 * @param p the concerned poll
+	 * @param u the concerned user
+	 * @return true if the user has created the poll, false otherwise
+	 * @throws SQLException
+	 */
 	public boolean isCreatedBy(Poll p, User u) throws SQLException
 	{
 		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_user = ? and id_poll = ?");

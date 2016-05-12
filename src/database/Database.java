@@ -7,6 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Utility class that initializes the JDBC driver. It reads a file to get the logins.
+ * @author MAX
+ *
+ */
 public class Database {
 	
 	private static final String FICHIER_PROPERTIES       = "/database/database.properties";
@@ -17,6 +22,9 @@ public class Database {
     
     private Connection conn;
     
+    /**
+     * Initialize the JDBC driver
+     */
     public Database()
     {
     	Properties properties = new Properties();

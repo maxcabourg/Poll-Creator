@@ -6,41 +6,67 @@ import java.util.ArrayList;
 
 import POJO.Comment;
 
+/**
+ * DAO made to manage comments in the database
+ * @author Max Cabourg
+ *
+ */
 public class CommentDAO extends DAO<Comment> {
 	
+	/**
+	 * Basic constructor
+	 */
 	public CommentDAO() {
 		super();
 	}
 
 	@Override
-	public boolean create(Comment comment) throws SQLException {
+	/**
+	 * Inserts a comment in the database
+	 * @param comment the comment to insert
+	 * @throws SQL exception
+	 */
+	public void create(Comment comment) throws SQLException {
 		stmt = connect.prepareStatement("INSERT INTO Comment (content, id_poll, id_user) VALUES (?, ?, ?)");
 		stmt.setString(1, comment.getContent());
 		stmt.setInt(2, comment.getId_poll());
 		stmt.setInt(3, comment.getId_user());
 		stmt.executeUpdate();
-		return true;
 	}
 
 	@Override
-	public boolean delete(Comment comment) throws SQLException {
+	/**
+	 * Deletes a comment in the database
+	 * @param comment the comment to delete
+	 * @throws SQLException
+	 */
+	public void delete(Comment comment) throws SQLException {
 		stmt = connect.prepareStatement("DELETE FROM Comment WHERE id_comment = ?");
 		stmt.setInt(1, comment.getId());
 		stmt.executeUpdate();
-		return true;
 	}
 
 	@Override
-	public boolean update(Comment comment) throws SQLException {
+	/**
+	 * Updates a comment in the database
+	 * @param comment the comment to update
+	 * @throws SQLException
+	 */
+	public void update(Comment comment) throws SQLException {
 		stmt = connect.prepareStatement("UPDATE Comment SET content = ?, id_poll = ?, id_user = ?");
 		stmt.setString(1, comment.getContent());
 		stmt.setInt(2, comment.getId_poll());
 		stmt.setInt(3, comment.getId_user());
 		stmt.executeUpdate();
-		return true;
 	}
 
 	@Override
+	/**
+	 * Finds a comment in the database thanks to the provided id
+	 * @param id id of the comment to seek in the database
+	 * @return the comment associated to this id, null if not found
+	 * @throws SQLException
+	 */
 	public Comment find(int id) throws SQLException {
 		stmt = connect.prepareStatement("SELECT * FROM Comment WHERE id_comment = ?");
 		stmt.setInt(1, id);
@@ -62,7 +88,7 @@ public class CommentDAO extends DAO<Comment> {
 	}
 	
 	/**
-	 * 
+	 * Finds all the comments concerning a poll
 	 * @param idPoll poll which we want to get the comments
 	 * @return an arrayList containing all the comments concerning the poll
 	 * @throws SQLException if the request fails

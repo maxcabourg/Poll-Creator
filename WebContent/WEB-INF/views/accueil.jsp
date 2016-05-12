@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Welcome</title>
 
     <!-- Bootstrap -->
     <link type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet">
@@ -22,11 +22,13 @@
   <body>
   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   	<c:choose>
-    	<c:when test="${empty user}"><jsp:include page="../views/nav/visitorNav.jsp" /></c:when>
-    	<c:otherwise><jsp:include page="../views/nav/loggedNav.jsp" /></c:otherwise>
+    	<c:when test="${empty user}"><jsp:include page="../views/nav/visitorNav.jsp" />
+    	<p>Hello dear visitor, you are here on a poll creator which will allow you to create polls and broadcast them to your friends !</p>
+    	<p>Do not hesitate to <a href="${pageContext.request.contextPath}/inscription">register !</a></c:when>
+    	<c:otherwise><jsp:include page="../views/nav/loggedNav.jsp" /><h1>Welcome back <c:out value="${user.pseudo}" /> !</h1></c:otherwise>
 	</c:choose>
   	
-    <h1>Hello <c:out value="${user.pseudo}" /></h1>
+    
     <jsp:include page="../views/footer.jsp" />
 
   </body>

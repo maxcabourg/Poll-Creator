@@ -2,6 +2,18 @@ package POJO;
 
 import java.util.List;
 
+/**
+ * POJO representing a poll.
+ * It is made of : <br>
+ * <ul>
+ * 	<li>an id</li>
+ *  <li>the question of the poll</li>
+ *  <li>an ArrayList containing the answers of the poll</li>
+ *  <li>The creator of the poll</li>
+ * </ul>
+ * @author Max Cabourg
+ *
+ */
 public class Poll {
 
 	private int id;

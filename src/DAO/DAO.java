@@ -8,12 +8,21 @@ import java.util.ArrayList;
 
 import database.Database;
 
+/**
+ * Data Access Object : Provides 4 functions according to the <strong>CRUD</strong> pattern.
+ * @author Max Cabourg
+ *
+ * @param <T> Type of object 
+ */
 public abstract class DAO<T> {
 
   protected Database db;
   protected Connection connect;
   protected PreparedStatement stmt;
   
+  /**
+   * Intializates the database.
+   */
   public DAO()
   {
 	  db = new Database();
@@ -23,32 +32,28 @@ public abstract class DAO<T> {
   /**
   * Inserts a T object in the database
   * @param obj the object to insert in the database
-  * @return true if it worked, false otherwise
- * @throws SQLException 
+  * @throws SQLException
   */
-  public abstract boolean create(T obj) throws SQLException;
+  public abstract void create(T obj) throws SQLException;
 
   /**
   * Deletes a T object in the database
   * @param obj the object to delete
-  * @return true if it worked, false otherwise
- * @throws SQLException 
+  * @throws SQLException 
   */
-  public abstract boolean delete(T obj) throws SQLException;
+  public abstract void delete(T obj) throws SQLException;
 
   /**
   * Updates a T object in the database
   * @param obj the object to update
-  * @return true if it worked, false otherwise
- * @throws SQLException 
+  * @throws SQLException 
   */
-  public abstract boolean update(T obj) throws SQLException;
+  public abstract void update(T obj) throws SQLException;
 
   /**
   * Finds an object in the database thanks to its ID
   * @param id id of the object
-  * @return the object concerned
- * @throws SQLException 
+  * @throws SQLException 
   */
   public abstract T find(int id) throws SQLException;
   
@@ -56,7 +61,7 @@ public abstract class DAO<T> {
   /**
    * Finds every row of the class concerned in the database
    * @return a list of every object stored in the database.
- * @throws SQLException 
+   * @throws SQLException 
    */
   public abstract ArrayList<T> getAll() throws SQLException;
 }

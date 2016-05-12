@@ -3,6 +3,18 @@ package POJO;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * POJO representing an user.
+ * It is composed of : <br>
+ * <ul>
+ * 	<li>an id</li>
+ *  <li>the name</li>
+ *  <li>an encrypted password</li>
+ *  <li>an email</li>
+ * <ul>
+ * @author Max Cabourg
+ *
+ */
 public class User {
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
