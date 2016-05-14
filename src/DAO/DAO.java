@@ -16,7 +16,7 @@ import database.Database;
  */
 public abstract class DAO<T> {
 
-  protected Database db;
+  protected Database db = new Database();
   protected Connection connect;
   protected PreparedStatement stmt;
   
@@ -25,7 +25,6 @@ public abstract class DAO<T> {
    */
   public DAO()
   {
-	  db = new Database();
 	  connect = db.getConnexion();
   }
    

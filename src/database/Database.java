@@ -19,8 +19,8 @@ public class Database {
     private static final String PROPERTY_DRIVER          = "driver";
     private static final String PROPERTY_USERNAME 		 = "nomutilisateur";
     private static final String PROPERTY_PASSWORD   	 = "motdepasse";
-    
-    private Connection conn;
+    private static int NB_INSTANCES = 0;
+    public static Connection conn;
     
     /**
      * Initialize the JDBC driver
@@ -43,7 +43,9 @@ public class Database {
 	        nomUtilisateur = properties.getProperty( PROPERTY_USERNAME);
 	        motDePasse = properties.getProperty(PROPERTY_PASSWORD);
 	        Class.forName(driver);
-	        conn = DriverManager.getConnection(url, nomUtilisateur, motDePasse);
+	        NB_INSTANCES++;
+	        if(NB_INSTANCES <= 1)
+	        	conn = DriverManager.getConnection(url, nomUtilisateur, motDePasse);
 		} catch (IOException e) {
 			System.out.println("Erreur : fichier de configuration introuvable.");
 			e.printStackTrace();
