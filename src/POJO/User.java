@@ -70,11 +70,11 @@ public class User {
 	}
 
 	public static boolean isValid(String pseudo, String password, String email){
-		return (pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
+		return (pseudo.length() >= 2 && pseudo.length() <= 20 && email.length() <= 50 && password.matches(User.PASSWORD_PATTERN));
 	}
 	
 	public boolean validUpdate(){
-		return (pseudo.length() < 20 && pseudo.length() >= 2 && email.length() <= 50 && email.matches(EMAIL_PATTERN));
+		return (pseudo.length() < 20 && pseudo.length() >= 2 && email.length() <= 50 && email.matches(EMAIL_PATTERN) && password.matches(PASSWORD_PATTERN));
 	}
 	
 	public static Map<String, String> getErrors(String pseudo, String password, String passwordConfirm, String email)

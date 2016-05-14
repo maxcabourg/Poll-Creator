@@ -31,14 +31,25 @@
 		    <label for="pseudo">E-mail : </label>
 		    <input type="email" class="form-control" name="mail" value="${user.email}">
   		</div>
+  		<div class="form-group">
+		    <label for="pseudo">Reset password : </label>
+		    <input type="password" class="form-control" name="password">
+  		</div>
   		<input type="hidden" name="put" value="PUT"/>
   		<button type="submit" class="btn btn-default">Update my profile</button>
-  		${invalidParameter}
+  		<c:if test="${not empty invalidParameter}">
+		    <div class="alert alert-danger" role="alert">
+				${invalidParameter}
+			</div>
+		</c:if>
     </form>
     
      <h2>My polls : </h2>
      <c:forEach items="${polls}" var="poll">
-  		<p>${poll.question} : <a href="${pageContext.request.contextPath}/poll/delete?id=${poll.id}">Delete</a> <a href="${pageContext.request.contextPath}/poll/get?id=${poll.id}">See more</a></p><br>
+  		<p>${poll.question} : 	
+  			<a href="${pageContext.request.contextPath}/poll/delete?id=${poll.id}"><button type="button" class="btn btn-danger">Delete</button></a>
+  			<a href="${pageContext.request.contextPath}/poll/get?id=${poll.id}"><button type="button" class="btn btn-secondary">See more</button></a>
+  		</p><br>
   	</c:forEach>
     <jsp:include page="../views/footer.jsp" />
 

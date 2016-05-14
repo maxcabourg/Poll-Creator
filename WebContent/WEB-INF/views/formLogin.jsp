@@ -18,6 +18,7 @@
     <![endif]-->
   </head>
   <body>
+ 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
     <form method="POST" action="${pageContext.request.contextPath}/login">
     	<div class="form-group">
@@ -28,8 +29,12 @@
 		    <label for="pseudo">Password : </label>
 		    <input type="password" class="form-control" name="password" placeholder="Password">
   		</div>
-  		<button type="submit" class="btn btn-default">Submit</button>
-  		${error}
+  		<button type="submit" class="btn btn-success">Submit</button>
+  		<c:if test="${not empty error}">
+			    <div class="alert alert-danger" role="alert">
+					${error}
+				</div>
+		</c:if>
     </form>
     <jsp:include page="../views/footer.jsp" />
 

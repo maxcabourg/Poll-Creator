@@ -31,7 +31,7 @@
 	  	</c:forEach>
 	  	<div class="form-group">
 		    <label for="comment">Leave a comment : </label><br>
-		    <textarea name="comment" maxlength=100 cols=20 rows=5>Your comment...</textarea>
+		    <textarea name="comment" maxlength=100 cols=20 rows=5 placeholder="Your comment"></textarea>
 	  	</div>
 	  	<button type="submit" class="btn btn-default">Answer !</button>
     </form>

@@ -18,30 +18,51 @@
     <![endif]-->
   </head>
   <body>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   	<jsp:include page="../views/nav/visitorNav.jsp" />
     <form method="POST" action="${pageContext.request.contextPath}/inscription">
     	<div class="form-group">
 		    <label for="pseudo">Pseudo : </label> It must contain at least 2 characters and 20 characters maximum
 		    <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
-			${errors.pseudoLength}
+		    <c:if test="${not empty errors.pseudoLength}">
+			    <div class="alert alert-danger" role="alert">
+					${errors.pseudoLength}
+				</div>
+			</c:if>
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Password : </label> It must contain at least one number, one character in UPPER case, one in lower case and 1 special character among @#$!% and must have between 6 and 40 characters
 		    <input type="password" class="form-control" name="password">
-		    ${errors.passwordValidity}
+		   <c:if test="${not empty errors.passwordValidity}">
+			    <div class="alert alert-danger" role="alert">
+					${errors.passwordValidity}
+				</div>
+			</c:if>
   		</div>
   		<div class="form-group">
 		    <label for="pseudo">Confirm password : </label>
 		    <input type="password" class="form-control" name="passwordConfirm">
-		    ${errors.passwordConfirm}
+		    <c:if test="${not empty errors.passwordConfirm}">
+			    <div class="alert alert-danger" role="alert">
+					${errors.passwordConfirm}
+				</div>
+			</c:if>
   		</div>
   		<div class="form-group">
 		    <label for="mail"> Email : </label>
 		    <input type="email" class="form-control" name="mail" placeholder="Email">
-		    ${errors.mailValidity}<br>
-		    ${errors.mailLength}
+		    <c:if test="${not empty errors.mailValidity}">
+			    <div class="alert alert-danger" role="alert">
+					${errors.mailValidity}
+				</div>
+			</c:if>
+			<c:if test="${not empty errors.mailLength}">
+			    <div class="alert alert-danger" role="alert">
+					${errors.mailLength}
+				</div>
+			</c:if>
   		</div>
-  		<button type="submit" class="btn btn-default">Submit</button>
+  		<button type="submit" class="btn btn-success">Submit</button>
     </form>
     <jsp:include page="../views/footer.jsp" />
 

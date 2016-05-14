@@ -63,12 +63,12 @@ public class Profile extends HttpServlet{
 			
 			try {
 				ArrayList<Poll> polls = pollDao.findByUser(u);
+				u.setPseudo(request.getParameter("pseudo"));
+				u.setEmail(request.getParameter("mail"));
+				u.setPassword(request.getParameter("password"));
 				if(u.validUpdate())
-				{
-					
-					UserDAO dao = new UserDAO();
-					u.setPseudo(request.getParameter("pseudo"));
-					u.setEmail(request.getParameter("mail"));
+				{	
+					UserDAO dao = new UserDAO();		
 					dao.update(u);
 				}
 				else
@@ -83,6 +83,7 @@ public class Profile extends HttpServlet{
 				response.addCookie(cookie);
 				getServletContext().getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
 			} catch (SQLException e) {
+				e.printStackTrace();
 				getServletContext().getRequestDispatcher("/WEB-INF/views/SQLerror.jsp").forward(request, response);
 			}
 		}		

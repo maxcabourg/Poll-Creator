@@ -60,11 +60,15 @@ public class UserDAO extends DAO<User> {
 	 * @throws SQLException
 	 */
 	public void update(User user) throws SQLException {
-		// TODO Auto-generated method stub
-		stmt = connect.prepareStatement("UPDATE User SET pseudo = ?, password = ?, mail = ?");
+		stmt = connect.prepareStatement("UPDATE User SET pseudo = ?, password = ?, mail = ? WHERE id_user = ?");
 		stmt.setString(1, user.getPseudo());
-		stmt.setString(2, user.getPassword());
+		try {
+			stmt.setString(2, UserDAO.sha1(user.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		stmt.setString(3, user.getEmail());
+		stmt.setInt(4, user.getId());
 		stmt.executeUpdate();
 		stmt.close();
 	}
