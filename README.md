@@ -9,6 +9,9 @@ The DBMS is MySQL.
 ### Libraries
 	* JDBC : Java Database Connectivity : Interaction with the database.
 	* JSTL : Java Standard Tag Library : Have a batter front-end.
+## Triggers
+	* The first one is detecting some insulting words and cancels insertions.
+	* The second one allows to keep an historic of the deleted polls.
 ## Description
 This is my web project for the module called web architecture. It consists in a simple poll creator where you can create and answer polls
 and then see statistics about it.
