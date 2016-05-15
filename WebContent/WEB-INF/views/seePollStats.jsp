@@ -22,6 +22,7 @@
   <body>
   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <jsp:include page="../views/nav/loggedNav.jsp" />
+    <h2>${poll.question}</h2>
     <c:forEach items="${rates}" var="rate" varStatus="index">
   		<p>${rate} % answered ${answers[index.index].content}</p><br>
   	</c:forEach>
