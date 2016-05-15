@@ -19,7 +19,27 @@ public class LoginForm extends HttpServlet{
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
-		 getServletContext().getRequestDispatcher("/WEB-INF/views/formLogin.jsp").forward(request, response);
+		User u = null;
+		try
+		{
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){
+				for(Cookie c : cookies){
+					if(c.getName().equals(LoginForm.LOGIN_COOKIE_NAME)){
+						UserDAO dao = new UserDAO();
+						u = dao.find(c.getValue());
+						request.setAttribute("user", u);
+					}
+				}
+			}
+		}
+		catch (SQLException e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/views/SQLerror.jsp").forward(request, response);
+		}
+		if(u == null)
+			getServletContext().getRequestDispatcher("/WEB-INF/views/formLogin.jsp").forward(request, response);
+		else
+			getServletContext().getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(request, response);
 	}
 
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
