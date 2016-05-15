@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>About you</title>
+    <title>Welcome</title>
 
     <!-- Bootstrap -->
     <link type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap.css" rel="stylesheet">
@@ -21,38 +21,9 @@
   </head>
   <body>
   	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-  	<jsp:include page="../views/nav/loggedNav.jsp" />
-    <form method="POST" action="${pageContext.request.contextPath}/profile">
-    	<div class="form-group">
-		    <label for="pseudo">Pseudo : </label>
-		    <input type="text" class="form-control" name="pseudo" value="${user.pseudo}">
-  		</div>
-  		<div class="form-group">
-		    <label for="mail">E-mail : </label>
-		    <input type="email" class="form-control" name="mail" value="${user.email}">
-  		</div>
-  		<div class="form-group">
-		    <label for="password">Reset password : </label>
-		    <input type="password" class="form-control" name="password">
-  		</div>
-  		<input type="hidden" name="put" value="PUT"/>
-  		<button type="submit" class="btn btn-default">Update my profile</button>
-  		<c:if test="${not empty invalidParameter}">
-		    <div class="alert alert-danger" role="alert">
-				${invalidParameter}
-			</div>
-		</c:if>
-    </form>
-    
-     <form method ="POST" action="">
-     	<div class="form-group">
-		    <label for="searchPoll">Search in your polls : </label>
-		    <input type="text" class="form-control" name="searchPoll">
-  		</div>
-  		<button type="submit" class="btn btn-default">Search</button>
-     </form>
-     <h2>My polls : </h2>
-     <c:forEach items="${polls}" var="poll">
+    <jsp:include page="../views/nav/loggedNav.jsp" />
+    <h2>Polls found : </h2>
+  	<c:forEach items="${polls}" var="poll">
   		<p>${poll.question} : 	
   			<a href="${pageContext.request.contextPath}/poll/delete?id=${poll.id}"><button type="button" class="btn btn-danger">Delete</button></a>
   			<a href="${pageContext.request.contextPath}/poll/get?id=${poll.id}"><button type="button" class="btn btn-secondary">See more</button></a>

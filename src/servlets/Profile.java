@@ -55,6 +55,16 @@ public class Profile extends HttpServlet{
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{		
 		if(request.getParameter("put") != null)
 			doPut(request, response);
+		else if(request.getParameter("searchPoll").length() > 0 && request.getParameter("searchPoll") != null)
+		{
+			try {
+				ArrayList<Poll> polls = pollDao.findByUserAndPattern(u, request.getParameter("searchPoll"));
+				request.setAttribute("polls", polls);
+				getServletContext().getRequestDispatcher("/WEB-INF/views/pollsFound.jsp").forward(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void doPut( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{

@@ -119,6 +119,27 @@ public class PollDAO extends DAO<Poll>{
 		}
 			return polls;
 	}
+	
+	/**
+	 * Finds all the polls created by an user with a specific pattern
+	 * @param user the concerned user
+	 * @param pattern pattern to seek
+	 * @return an ArrayList containing all the polls created by the user
+	 * @throws SQLException
+	 */
+	public ArrayList<Poll> findByUserAndPattern(User user, String pattern) throws SQLException{
+		ArrayList<Poll> polls = new ArrayList<Poll>();
+		stmt = connect.prepareStatement("SELECT * FROM Poll WHERE id_user = ? AND question LIKE ?");
+		stmt.setInt(1, user.getId());
+		stmt.setString(2, "%"+pattern+"%");
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next())
+		{
+			int id_poll = rs.getInt("id_poll");
+			polls.add(find(id_poll));
+		}
+			return polls;
+	}
 
 	@Override
 	/**
