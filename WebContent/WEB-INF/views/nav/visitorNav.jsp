@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="${pageContext.request.contextPath}/accueil">Home</a></li>
       <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/inscription">Sign in</a></li>
+      <li><a href="${pageContext.request.contextPath}/inscription">Sign up</a></li>
     </ul>
   </div>
 </nav>

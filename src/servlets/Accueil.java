@@ -36,4 +36,5 @@ public class Accueil extends HttpServlet{
 		 
 		 getServletContext().getRequestDispatcher("/WEB-INF/views/accueil.jsp").forward(request, response);
 	}
+
 }
