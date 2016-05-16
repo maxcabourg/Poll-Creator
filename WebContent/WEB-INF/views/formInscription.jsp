@@ -62,6 +62,11 @@
 				</div>
 			</c:if>
   		</div>
+  		<c:if test="${not empty error}">
+			    <div class="alert alert-danger" role="alert">
+					${error}
+				</div>
+		</c:if>
   		<button type="submit" class="btn btn-success">Submit</button>
     </form>
     <jsp:include page="../views/footer.jsp" />

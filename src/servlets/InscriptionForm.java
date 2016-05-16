@@ -32,7 +32,8 @@ public class InscriptionForm extends HttpServlet{
 			 try {
 				dao.create(u);
 			} catch (SQLException e) {
-				getServletContext().getRequestDispatcher("/WEB-INF/views/SQLerror.jsp").forward(request, response);
+				request.setAttribute("error", "This name or mail adress is already taken");
+				getServletContext().getRequestDispatcher("/WEB-INF/views/formInscription.jsp").forward(request, response);
 			}
 			getServletContext().getRequestDispatcher("/WEB-INF/views/inscriptionDone.jsp").forward(request, response);
 		 }
