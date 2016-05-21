@@ -20,5 +20,6 @@
   </head>
 <body>
 	<p>Congratulations ! Now share your poll by clicking this link then give the URL : <a href="${pageContext.request.contextPath}/poll/get?id=${idPoll}">${pageContext.request.contextPath}/poll/get?id=${idPoll}</a></p>
+	<jsp:include page="../views/footer.jsp" />
 </body>
 </html>
